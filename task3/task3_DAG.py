@@ -30,13 +30,10 @@ def transform_data(**kwargs):
     return transformed
 
 def load_data(**kwargs):
-    import os
     ti = kwargs['ti']
     data = ti.xcom_pull(task_ids='transform')
 
-    output_dir = '/opt/airflow/output'
-    os.makedirs(output_dir, exist_ok=True)
-    
+       
     with open('output/users.csv', 'w', newline='') as f:
         writer = csv.DictWriter(f, fieldnames=['id', 'name', 'email'])
         writer.writeheader()
